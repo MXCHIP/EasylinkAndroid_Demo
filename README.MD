@@ -14,12 +14,6 @@ EasyLink SDK 主要功能:
 1）[简单的示例程序：](https://github.com/MXCHIP/EasylinkAndroid_Demo)  
 提供了一个简单的UI，展示EasyLink SDK的使用方法 ，主要功能是配网和设备发现。
 
-    扫下方二维码， 下载简单 UI 的 Android 版本 Easylink APP。
-
->特别提示：Android 微信扫一扫用户，请选择右上角“在浏览器中打开”进行下载。
-
-![mxeasylink_app](http://developer.mxchip.com/fileDownload/455)
-
 
 ##### Android Studio引入的资源
 
