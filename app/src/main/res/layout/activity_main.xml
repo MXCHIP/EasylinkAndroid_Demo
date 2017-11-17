@@ -29,6 +29,18 @@
         android:text="发送配网"
         android:textColor="#FFFFFF" />
 
+    <TextView
+        android:id="@+id/easylinkstop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:text="关闭配网"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center_horizontal" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

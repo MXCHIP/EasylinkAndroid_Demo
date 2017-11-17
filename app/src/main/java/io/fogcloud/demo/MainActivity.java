@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import io.fogcloud.sdk.easylink.api.EasyLink;
 import io.fogcloud.sdk.easylink.api.EasylinkP2P;
@@ -19,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private String TAG = "---main---";
     private Context mContext;// 上下文
-//    private EditText ssid;
-//    private EditText psw;
     private EditText log_view;
     private int countno;
 
@@ -34,32 +33,36 @@ public class MainActivity extends AppCompatActivity {
 
         final EasyLink el = new EasyLink(MainActivity.this);
 
-        final EasylinkP2P elp2p = new EasylinkP2P(mContext);
 
         TextView easylinktest = (TextView) findViewById(R.id.easylinktest);
+        TextView easylinkstop = (TextView) findViewById(R.id.easylinkstop);
 
         EditText et = (EditText) findViewById(R.id.ssid);
         et.setText(el.getSSID());
 
         final EditText psw = (EditText) findViewById(R.id.psw);
+        final EditText ssid = (EditText) findViewById(R.id.ssid);
 
         log_view = (EditText) findViewById(R.id.log);
         log_view.setText("");
+
         easylinktest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EasylinkP2P elp2p = new EasylinkP2P(mContext);
                 EasyLinkParams elp = new EasyLinkParams();
-                elp.ssid = el.getSSID();
+                elp.ssid = ssid.getText().toString().trim();
                 elp.password = psw.getText().toString().trim();
                 elp.sleeptime = 50;
                 elp.runSecond = 20000;
+                Toast.makeText(mContext, "open easylink", Toast.LENGTH_SHORT).show();
 
 //                el.startEasyLink(elp, new EasyLinkCallBack() {
                 elp2p.startEasyLink(elp, new EasyLinkCallBack() {
                     @Override
                     public void onSuccess(int code, String message) {
                         Log.d(TAG, message);
-                        send2handler(1,message);
+                        send2handler(1, message);
                     }
 
                     @Override
@@ -67,18 +70,30 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, message);
                     }
                 });
-
             }
         });
 
-        new Thread() {
+        easylinkstop.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-//                MDNS mdns = new MDNS();
-            }
-        }.start();
-    }
+            public void onClick(View view) {
+                EasylinkP2P elp2p = new EasylinkP2P(mContext);
+                Toast.makeText(mContext, "stop easylink", Toast.LENGTH_SHORT).show();
+                elp2p.stopEasyLink(new EasyLinkCallBack() {
+                    @Override
+                    public void onSuccess(int code, String message) {
+                        Log.d(TAG, message);
+                        send2handler(2, message);
+                    }
 
+                    @Override
+                    public void onFailure(int code, String message) {
+                        Log.d(TAG, message);
+                    }
+                });
+            }
+        });
+
+    }
     private void send2handler(int code, String message) {
         Message msg = new Message();
         msg.what = code;
@@ -95,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 log_view.append(msg.obj.toString().trim() + "\r\n");
                 countno ++;
+            }
+            if(msg.what == 2) {
+                log_view.setText("");
             }
         }
     };
