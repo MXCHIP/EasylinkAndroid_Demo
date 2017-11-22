@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
 
         final EasyLink el = new EasyLink(MainActivity.this);
+        final EasylinkP2P elp2p = new EasylinkP2P(mContext);
 
 
         TextView easylinktest = (TextView) findViewById(R.id.easylinktest);
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         easylinktest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasylinkP2P elp2p = new EasylinkP2P(mContext);
                 EasyLinkParams elp = new EasyLinkParams();
                 elp.ssid = ssid.getText().toString().trim();
                 elp.password = psw.getText().toString().trim();
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         easylinkstop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasylinkP2P elp2p = new EasylinkP2P(mContext);
                 Toast.makeText(mContext, "stop easylink", Toast.LENGTH_SHORT).show();
                 elp2p.stopEasyLink(new EasyLinkCallBack() {
                     @Override
