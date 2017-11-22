@@ -1,5 +1,5 @@
 # Android版本EasyLink SDK
-### **请注意，Easylink AWS请使用v0.1.8版本**
+### **请注意，Easylink AWS请使用v0.1.9版本**
 EasyLink SDK 主要功能:    
 
   * 将手机端设置的Wi-Fi网络参数发送到设备端
