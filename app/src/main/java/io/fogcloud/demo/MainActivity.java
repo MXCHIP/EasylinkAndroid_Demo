@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         elp.ssid = ssid.getText().toString().trim();
                         elp.password = psw.getText().toString().trim();
                         elp.sleeptime = 50;
-                        elp.runSecond = 20000;
+                        elp.runSecond = 50;
                         Toast.makeText(mContext, "open easylink", Toast.LENGTH_SHORT).show();
 
                         elp2p.startEasyLink(elp, new EasyLinkCallBack() {
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(int code, String message) {
                                 Log.d(TAG, message);
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
                             }
                         });
                     } else {
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         elp2p.stopEasyLink(new EasyLinkCallBack() {
                             @Override
                             public void onSuccess(int code, String message) {
-//                                Log.d(TAG,"++++++++++++++");
+
                                 Log.d(TAG, message);
                                 send2handler(2, message);
                             }
@@ -110,12 +111,7 @@ public class MainActivity extends AppCompatActivity {
     Handler LHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             if (msg.what == 1) {
-                if (countno > 2) {
-                    log_view.setText("");
-                    countno = 1;
-                }
-                log_view.append(msg.obj.toString().trim() + "\r\n");
-                countno++;
+                log_view.setText(msg.obj.toString().trim() + "\r\n");
             }
             if (msg.what == 2) {
                 log_view.setText("");
