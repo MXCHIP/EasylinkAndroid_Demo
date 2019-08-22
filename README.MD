@@ -92,7 +92,7 @@ easylinkPara     | EasyLinkParams       | EasyLinkParams包含以下的信息
 ssid        | String       | 无默认值，不可为空 | 当前wifi的名称
 password     | String       | 无默认值，可为空 | 当前wifi的密码(8-64个字节，越长配网速度越慢)
 isSendIP     | Boolean       | 默认值为false，可为空|是否发送手机的IP，默认不发送，如果此参数为false，那么extraData也不可用
-runSecond         | int       | 默认值60000，可为空 | 发送持续的时间，到点了就停止发送, 单位ms
+runSecond         | int       | 默认值50，可为空 | 发送持续的时间，到点了就停止发送, 单位s
 sleeptime         | int       | 默认值50，可为空 | 每包数据的间隔时间，建议20-200, 单位ms
 extraData         | String     | 无默认值，可为空   | 需要发送给设备的额外信息
 rc4key     | String       | 无默认值，可为空 | 如果需要RC4加密，这里就输入字符串密钥
